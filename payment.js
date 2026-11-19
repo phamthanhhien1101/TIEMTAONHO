@@ -48,23 +48,28 @@ function createOrderMessage(customerInfo, paymentMethod, total) {
         card: '💳 Thẻ tín dụng / Ghi nợ'
     };
     
-    let orderDetails = `📦 ĐƠN HÀNG MỚI\n`;
-    orderDetails += `══════════════════\n`;
-    orderDetails += `👤 Người nhận: ${customerInfo.name}\n`;
-    orderDetails += `📞 SĐT: ${customerInfo.phone}\n`;
-    orderDetails += `📍 Địa chỉ: ${customerInfo.address}\n`;
-    orderDetails += `💳 Thanh toán: ${paymentNames[paymentMethod]}\n`;
-    if (customerInfo.note) orderDetails += `📝 Ghi chú: ${customerInfo.note}\n`;
-    orderDetails += `══════════════════\n`;
-    orderDetails += `🛒 Chi tiết:\n`;
+    let orderDetails = `🎉 Đặt hàng thành công!
+
+📦 ĐƠN HÀNG MỚI
+══════════════════
+👤 Người nhận: ${customerInfo.name}
+📞 SĐT: ${customerInfo.phone}
+📍 Địa chỉ: ${customerInfo.address}
+💳 Thanh toán: ${paymentNames[paymentMethod]}
+📝 Ghi chú: ${customerInfo.note || 'Không có'}
+══════════════════
+🛒 Chi tiết:
+`;
     
     cart.forEach(item => {
-        orderDetails += `• ${item.name}\n  └ ${item.color} | ${item.capacity} | ${item.price} × ${item.quantity}\n`;
+        orderDetails += `• ${item.name}
+  └ ${item.color} | ${item.capacity} | ${item.price} × ${item.quantity}
+`;
     });
     
-    orderDetails += `══════════════════\n`;
-    orderDetails += `💰 TỔNG TIỀN: ${total.toLocaleString('vi-VN')} VNĐ\n`;
-    orderDetails += `🕐 Thời gian: ${new Date().toLocaleString('vi-VN')}\n`;
+    orderDetails += `══════════════════
+💰 TỔNG TIỀN: ${total.toLocaleString('vi-VN')} VNĐ
+🕐 Thời gian: ${new Date().toLocaleString('vi-VN')}`;
     
     return orderDetails;
 }
@@ -116,6 +121,9 @@ document.getElementById('checkout-form').addEventListener('submit', function(e) 
     // Lưu đơn hàng vào lịch sử
     saveOrderToHistory(customerInfo, paymentMethod, total, orderText);
     
+    // ✅ HIỂN THỊ THÔNG BÁO THÀNH CÔNG — KHÔNG CÓ EMAIL
+    alert(orderText);
+    
     // Xóa giỏ hàng
     cart = [];
     localStorage.removeItem('cart');
@@ -129,6 +137,9 @@ document.getElementById('checkout-form').addEventListener('submit', function(e) 
     document.querySelector('input[value="cod"]').checked = true;
     document.getElementById('bank-info').style.display = 'none';
     document.getElementById('card-info').style.display = 'none';
+    
+    // Chuyển về trang chủ sau khi nhấn OK
+    window.location.href = 'index.html';
 });
 
 // === Khởi động ===
