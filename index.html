@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cửa hàng điện tử — Sản phẩm</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <h1>🛒 TIỆM TÁO NHỎ</h1>
+    </header>
+
+    <div class="nav-bar">
+        <div id="user-info" class="user-area"></div>
+        <a href="cart.html" class="cart-icon">🛒 Giỏ hàng <span id="cart-count" class="cart-badge">0</span></a>
+    </div>
+
+    <div class="search-bar">
+        <input type="text" id="search-input" placeholder="🔍 Tìm kiếm sản phẩm...">
+    </div>
+
+    <main>
+        <h2 class="page-title">📦 Danh sách sản phẩm</h2>
+        <div id="product-list" class="product-grid">
+            <div class="loading">⏳ Đang tải sản phẩm...</div>
+        </div>
+        <div id="pagination" class="pagination"></div>
+    </main>
+
+    <!-- Modal chi tiết sản phẩm -->
+    <div id="detail-modal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn">&times;</span>
+            <div id="product-detail"></div>
+        </div>
+    </div>
+
+    <footer>
+        &copy; 2026 Cửa hàng điện tử
+    </footer>
+
+    <script src="auth.js"></script>
+    <script src="script.js"></script>
+    <!-- Popup: Chọn màu + GB trước khi thêm vào giỏ -->
+<div id="add-cart-modal" class="modal">
+    <div class="modal-content add-cart-modal-content">
+        <span class="close-btn" onclick="closeAddCartModal()">&times;</span>
+        <h3>🛒 Thêm vào giỏ hàng</h3>
+        <p class="ac-product-name" id="ac-product-name"></p>
+        
+        <div class="selector-group">
+            <label>🎨 Chọn màu:</label>
+            <select id="ac-color-select"></select>
+        </div>
+        
+        <div class="selector-group">
+            <label>💾 Chọn dung lượng:</label>
+            <select id="ac-capacity-select"></select>
+        </div>
+        
+        <div class="ac-price-display">
+            <strong>💰 Giá: </strong><span id="ac-price-display"></span>
+        </div>
+        
+        <div class="ac-buttons">
+            <button id="ac-cancel-btn" class="btn-secondary">❌ Hủy</button>
+            <button id="ac-confirm-btn" class="btn-primary">✅ Xác nhận thêm</button>
+        </div>
+    </div>
+</div>
+</body>
+</html>

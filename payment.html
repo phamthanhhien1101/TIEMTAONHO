@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thanh toán đơn hàng</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <h1>🛒 THANH TOÁN ĐƠN HÀNG</h1>
+    </header>
+
+    <div class="nav-bar">
+        <div id="user-info" class="user-area"></div>
+        <a href="cart.html" class="cart-icon">🛒 Quay lại giỏ hàng</a>
+    </div>
+
+    <div class="payment-container">
+        <!-- Thông tin đơn hàng -->
+        <div class="order-summary">
+            <h3>📋 Thông tin đơn hàng</h3>
+            <div id="order-items"></div>
+            <div class="total-amount">
+                <strong>Tổng tiền: </strong><span id="final-total">0 VNĐ</span>
+            </div>
+        </div>
+
+        <!-- Thông tin giao hàng & Thanh toán -->
+        <div class="shipping-form">
+            <h3>📍 Thông tin giao hàng</h3>
+            <form id="checkout-form">
+                <div class="form-group">
+                    <label>Họ và tên người nhận:</label>
+                    <input type="text" id="customer-name" required>
+                </div>
+                <div class="form-group">
+                    <label>Số điện thoại:</label>
+                    <input type="tel" id="customer-phone" required>
+                </div>
+                <div class="form-group">
+                    <label>Địa chỉ giao hàng:</label>
+                    <textarea id="customer-address" rows="3" required></textarea>
+                </div>
+
+                <!-- Phương thức thanh toán -->
+                <h3>💳 Phương thức thanh toán</h3>
+                <div class="payment-options">
+                    <label class="payment-option">
+                        <input type="radio" name="payment-method" value="cod" checked>
+                        <span class="payment-icon">💵</span>
+                        <span class="payment-text">Tiền mặt khi nhận hàng</span>
+                    </label>
+                    <label class="payment-option">
+                        <input type="radio" name="payment-method" value="bank">
+                        <span class="payment-icon">🏦</span>
+                        <span class="payment-text">Chuyển khoản ngân hàng</span>
+                    </label>
+                    <label class="payment-option">
+                        <input type="radio" name="payment-method" value="card">
+                        <span class="payment-icon">💳</span>
+                        <span class="payment-text">Thẻ tín dụng / Ghi nợ</span>
+                    </label>
+                </div>
+
+                <!-- Thông tin chuyển khoản - ẩn ban đầu -->
+                <div id="bank-info" class="payment-info-box">
+                    <p><strong>🏦 Thông tin tài khoản:</strong></p>
+                    <p>Ngân hàng: Vietcombank</p>
+                    <p>Số tài khoản: 1234567890</p>
+                    <p>Chủ tài khoản: Cửa hàng điện tử</p>
+                    <p>Nội dung: Thanh toán đơn hàng + SĐT</p>
+                </div>
+
+                <!-- Thông tin thẻ tín dụng - ẩn ban đầu -->
+                <div id="card-info" class="payment-info-box">
+                    <div class="form-group">
+                        <label>Số thẻ:</label>
+                        <input type="text" placeholder="XXXX XXXX XXXX XXXX">
+                    </div>
+                    <div style="display: flex; gap: 10px;">
+                        <div class="form-group" style="flex: 1;">
+                            <label>Ngày hết hạn:</label>
+                            <input type="text" placeholder="MM/YY">
+                        </div>
+                        <div class="form-group" style="flex: 1;">
+                            <label>CVV:</label>
+                            <input type="text" placeholder="XXX">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label>Ghi chú:</label>
+                    <textarea id="order-note" rows="2"></textarea>
+                </div>
+
+                <button type="submit" class="btn-primary" id="submit-btn">✅ Xác nhận đặt hàng</button>
+            </form>
+        </div>
+    </div>
+
+    <footer>
+        &copy; 2026 Cửa hàng điện tử
+    </footer>
+
+    <script src="auth.js"></script>
+    <script src="payment.js"></script>
+    <script>
+        // Hiển thị/ẩn thông tin thanh toán
+        document.querySelectorAll('input[name="payment-method"]').forEach(radio => {
+            radio.addEventListener('change', function() {
+                document.getElementById('bank-info').style.display = 'none';
+                document.getElementById('card-info').style.display = 'none';
+                if (this.value === 'bank') {
+                    document.getElementById('bank-info').style.display = 'block';
+                } else if (this.value === 'card') {
+                    document.getElementById('card-info').style.display = 'block';
+                }
+            });
+        });
+    </script>
+</body>
+</html>

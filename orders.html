@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quản lý đơn hàng</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <h1>📋 QUẢN LÝ ĐƠN HÀNG</h1>
+    </header>
+
+    <div class="nav-bar">
+        <div><strong>🔐 Chỉ dành cho quản lý</strong></div>
+        <a href="index.html" class="cart-icon">🏠 Trang chủ</a>
+    </div>
+
+    <main>
+        <h2 class="page-title">📦 Lịch sử đơn hàng</h2>
+        <div style="text-align:center; margin-bottom:20px;">
+            <button onclick="clearAllOrders()" class="btn-secondary">🗑️ Xóa tất cả đơn hàng</button>
+        </div>
+        <div id="orders-list"></div>
+    </main>
+
+    <footer>
+        &copy; 2026 Cửa hàng điện tử — Đơn hàng gửi về: thhienju@gmail.com | SĐT: 0386442179
+    </footer>
+}
+    <script>
+        function loadOrders() {
+            const orders = JSON.parse(localStorage.getItem('orderHistory')) || [];
+            const container = document.getElementById('orders-list');
+            
+            if (orders.length === 0) {
+                container.innerHTML = '<div class="empty-cart"><h3>📭 Chưa có đơn hàng nào</h3><p>Khi khách đặt hàng, đơn hàng sẽ hiển thị tại đây.</p></div>';
+                return;
+            }
+            
+            container.innerHTML = '';
+            orders.forEach(order => {
+                container.innerHTML += `
+                    <div style="background:white; border-radius:12px; padding:20px; margin-bottom:15px; box-shadow:0 2px 8px rgba(0,0,0,0.05);">
+                        <h3 style="color:#1e3a8a; margin-bottom:10px;">📦 Đơn hàng #${order.id} — ${order.time}</h3>
+                        <p><strong>👤 Người nhận:</strong> ${order.customer.name}</p>
+                        <p><strong>📞 SĐT:</strong> ${order.customer.phone}</p>
+                        <p><strong>📍 Địa chỉ:</strong> ${order.customer.address}</p>
+                        ${order.customer.note ? `<p><strong>📝 Ghi chú:</strong> ${order.customer.note}</p>` : ''}
+                        <hr style="margin:10px 0;">
+                        <p><strong>🛒 Chi tiết:</strong></p>
+                        ${order.items.map(item => `
+                            <p style="margin:4px 0;">• ${item.name} — ${item.color} | ${item.capacity} | ${item.price} × ${item.quantity}</p>
+                        `).join('')}
+                        <p style="margin-top:10px; font-size:18px; font-weight:bold; color:#dc2626;">💰 Tổng tiền: ${order.total.toLocaleString('vi-VN')} VNĐ</p>
+                    </div>
+                `;
+            });
+        }
+        
+        function clearAllOrders() {
+            if (confirm('⚠️ Bạn có chắc muốn xóa tất cả đơn hàng?')) {
+                localStorage.removeItem('orderHistory');
+                loadOrders();
+            }
+        }
+        
+        loadOrders();
+    </script>
+</body>
+</html>

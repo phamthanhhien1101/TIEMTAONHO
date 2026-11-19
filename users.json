@@ -1,0 +1,4 @@
+[
+  { "id": 1, "username": "admin", "password": "123456", "fullname": "Quản trị viên", "email": "admin@shop.vn" },
+  { "id": 2, "username": "user1", "password": "123456", "fullname": "Nguyễn Văn A", "email": "nguyenvana@gmail.com" }
+]

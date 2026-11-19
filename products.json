@@ -1,0 +1,39 @@
+[
+  {
+    "id": 1,
+    "name": "Điện thoại iPhone 15",
+    "image": "https://taoxinh.vn/wp-content/uploads/2024/11/iphone-15-thuong-vs-iphone-15-plus-128gb-256gb-512gb.jpg",
+    "colors": [
+      { "name": "Xanh dương", "prices": { "128GB": "21.490.000 VNĐ", "256GB": "24.490.000 VNĐ", "512GB": "28.490.000 VNĐ" } },
+      { "name": "Xanh lá", "prices": { "128GB": "21.490.000 VNĐ", "256GB": "24.490.000 VNĐ", "512GB": "28.490.000 VNĐ" } },
+      { "name": "Đen", "prices": { "128GB": "21.990.000 VNĐ", "256GB": "24.990.000 VNĐ", "512GB": "28.990.000 VNĐ" } },
+      { "name": "Hồng", "prices": { "128GB": "21.790.000 VNĐ", "256GB": "24.790.000 VNĐ", "512GB": "28.790.000 VNĐ" } },
+      { "name": "Vàng", "prices": { "128GB": "21.990.000 VNĐ", "256GB": "24.990.000 VNĐ", "512GB": "28.990.000 VNĐ" } }
+    ],
+    "defaultPrice": "21.490.000 VNĐ",
+    "description": "iPhone 15 có Dynamic Island hiển thị linh hoạt các cảnh báo và hoạt động trực tiếp, giúp bạn không bỏ lỡ thông tin quan trọng. Chip A16 Bionic mạnh mẽ, tiết kiệm pin và hỗ trợ nhiều tính năng tiên tiến, bao gồm Phát Hiện Va Chạm để đảm bảo an toàn. Thiết kế bằng kính pha màu và nhôm bền bỉ, cùng khả năng chống nước và bụi. Màn hình Super Retina XDR 6,1 inch sáng gấp đôi dưới ánh nắng. Camera chính 48MP với Telephoto 2x cho phép chụp ảnh cận cảnh chi tiết và ảnh chân dung sống động."
+  },
+  {
+    "id": 2,
+    "name": "Laptop MacBook Air M3",
+    "image": "https://cdn2.cellphones.com.vn/358x/media/catalog/product/m/b/mba13-m3-spacegray-gallery1-202402_4_1_2.png",
+    "colors": [
+      { "name": "Xám không gian", "prices": { "8GB/256GB": "29.990.000 VNĐ", "8GB/512GB": "34.990.000 VNĐ", "16GB/512GB": "38.990.000 VNĐ" } },
+      { "name": "Bạc", "prices": { "8GB/256GB": "29.990.000 VNĐ", "8GB/512GB": "34.990.000 VNĐ", "16GB/512GB": "38.990.000 VNĐ" } },
+      { "name": "Vàng sao băng", "prices": { "8GB/256GB": "30.490.000 VNĐ", "8GB/512GB": "35.490.000 VNĐ", "16GB/512GB": "39.490.000 VNĐ" } },
+      { "name": "Đêm xanh", "prices": { "8GB/256GB": "30.490.000 VNĐ", "8GB/512GB": "35.490.000 VNĐ", "16GB/512GB": "39.490.000 VNĐ" } }
+    ],
+    "defaultPrice": "29.990.000 VNĐ",
+    "description": "Chip Apple M3 mạnh mẽ, tiết kiệm điện. Màn hình 13.6 inch Liquid Retina sắc nét. Siêu nhẹ chỉ 1.3kg, mỏng 11mm. Thời lượng pin lên đến 18 giờ sử dụng liên tục."
+  },
+  {
+    "id": 3,
+    "name": "Tai nghe AirPods Pro 3",
+    "image": "https://cdn2.cellphones.com.vn/x/media/catalog/product/a/i/airpods_pro_3_sep25_pdp_image_position_2__vn-vi_1.png",
+    "colors": [
+      { "name": "Trắng", "prices": { "Tiêu chuẩn": "5.890.000 VNĐ" } }
+    ],
+    "defaultPrice": "5.890.000 VNĐ",
+    "description": "Khử tiếng ồn hiệu quả gấp 2 lần AirPods Pro 2 và 4 lần so với AirPods Pro. Cảm biến nhịp tim hỗ trợ theo dõi sức khỏe khi tập luyện. Khả năng chống nước, chống mồ hôi và chống bụi đạt chuẩn IP57. Hoạt động bền bỉ lên đến 8 giờ với chế độ khử ồn chủ động. Phạm vi tìm kiếm chính xác hơn, tăng 1,5 lần so với trước."
+  }
+]
