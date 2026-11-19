@@ -116,16 +116,6 @@ document.getElementById('checkout-form').addEventListener('submit', function(e) 
     // Lưu đơn hàng vào lịch sử
     saveOrderToHistory(customerInfo, paymentMethod, total, orderText);
     
-    // Tạo liên kết mailto
-    const mailSubject = encodeURIComponent(`Đơn hàng mới - ${customerInfo.name} - ${new Date().toLocaleDateString('vi-VN')}`);
-    const mailBody = encodeURIComponent(orderText);
-    const mailLink = `mailto:${ADMIN_EMAIL}?subject=${mailSubject}&body=${mailBody}`;
-    
-    alert(`🎉 Đặt hàng thành công!\n\n${orderText}\n\n📧 Một cửa sổ email sẽ mở ra — vui lòng gửi để thông báo cho cửa hàng.`);
-    
-    // Mở email
-    window.location.href = mailLink;
-    
     // Xóa giỏ hàng
     cart = [];
     localStorage.removeItem('cart');
