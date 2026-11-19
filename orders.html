@@ -3,69 +3,62 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Quản lý đơn hàng</title>
+    <title>Xem Đơn Hàng</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <header>
-        <h1>📋 QUẢN LÝ ĐƠN HÀNG</h1>
-    </header>
 
-    <div class="nav-bar">
-        <div><strong>🔐 Chỉ dành cho quản lý</strong></div>
-        <a href="index.html" class="cart-icon">🏠 Trang chủ</a>
+<header>
+    <h1>📦 Đơn Hàng Đã Đặt</h1>
+</header>
+
+<main>
+    <div style="text-align: right; margin-bottom: 20px;">
+        <button onclick="xoaHetDonHang()" style="padding: 8px 16px; background: #dc2626; color: white; border: none; border-radius: 5px; cursor: pointer; margin-right: 10px;">🗑️ Xóa tất cả</button>
+        <a href="index.html" style="padding: 8px 16px; background: #b91c1c; color: white; border-radius: 5px; text-decoration: none;">🏠 Trang chủ</a>
     </div>
 
-    <main>
-        <h2 class="page-title">📦 Lịch sử đơn hàng</h2>
-        <div style="text-align:center; margin-bottom:20px;">
-            <button onclick="clearAllOrders()" class="btn-secondary">🗑️ Xóa tất cả đơn hàng</button>
-        </div>
-        <div id="orders-list"></div>
-    </main>
+    <div id="danh-sach-don-hang"></div>
+</main>
 
-    <footer>
-        &copy; 2026 Cửa hàng điện tử — Đơn hàng gửi về: thhienju@gmail.com | SĐT: 0386442179
-    </footer>
+<script>
+function taiDonHang() {
+    const donHang = JSON.parse(localStorage.getItem('orderHistory')) || [];
+    const noiDung = document.getElementById('danh-sach-don-hang');
+
+    if (donHang.length === 0) {
+        noiDung.innerHTML = '<div style="text-align:center; padding:50px; background:white; border-radius:10px;"><h3>📭 Chưa có đơn hàng nào</h3></div>';
+        return;
+    }
+
+    noiDung.innerHTML = '';
+    donHang.forEach(dh => {
+        noiDung.innerHTML += `
+            <div style="background:white; padding:20px; border-radius:10px; margin-bottom:15px; border-left:4px solid #b91c1c;">
+                <h3>📦 Đơn hàng — ${dh.time}</h3>
+                <p><strong>Người nhận:</strong> ${dh.customer.name}</p>
+                <p><strong>SĐT:</strong> ${dh.customer.phone}</p>
+                <p><strong>Địa chỉ:</strong> ${dh.customer.address}</p>
+                <p><strong>Thanh toán:</strong> ${dh.paymentMethod === 'cod' ? 'Tiền mặt khi nhận hàng' : dh.paymentMethod === 'bank' ? 'Chuyển khoản' : 'Thẻ'}</p>
+                <p><strong>Sản phẩm:</strong></p>
+                <ul>
+                    ${dh.items.map(i => `<li>${i.name} × ${i.quantity} — ${i.price}</li>`).join('')}
+                </ul>
+                <p style="font-size:18px; font-weight:bold; color:#b91c1c;">💰 Tổng: ${dh.total.toLocaleString('vi-VN')} VNĐ</p>
+            </div>
+        `;
+    });
 }
-    <script>
-        function loadOrders() {
-            const orders = JSON.parse(localStorage.getItem('orderHistory')) || [];
-            const container = document.getElementById('orders-list');
-            
-            if (orders.length === 0) {
-                container.innerHTML = '<div class="empty-cart"><h3>📭 Chưa có đơn hàng nào</h3><p>Khi khách đặt hàng, đơn hàng sẽ hiển thị tại đây.</p></div>';
-                return;
-            }
-            
-            container.innerHTML = '';
-            orders.forEach(order => {
-                container.innerHTML += `
-                    <div style="background:white; border-radius:12px; padding:20px; margin-bottom:15px; box-shadow:0 2px 8px rgba(0,0,0,0.05);">
-                        <h3 style="color:#1e3a8a; margin-bottom:10px;">📦 Đơn hàng #${order.id} — ${order.time}</h3>
-                        <p><strong>👤 Người nhận:</strong> ${order.customer.name}</p>
-                        <p><strong>📞 SĐT:</strong> ${order.customer.phone}</p>
-                        <p><strong>📍 Địa chỉ:</strong> ${order.customer.address}</p>
-                        ${order.customer.note ? `<p><strong>📝 Ghi chú:</strong> ${order.customer.note}</p>` : ''}
-                        <hr style="margin:10px 0;">
-                        <p><strong>🛒 Chi tiết:</strong></p>
-                        ${order.items.map(item => `
-                            <p style="margin:4px 0;">• ${item.name} — ${item.color} | ${item.capacity} | ${item.price} × ${item.quantity}</p>
-                        `).join('')}
-                        <p style="margin-top:10px; font-size:18px; font-weight:bold; color:#dc2626;">💰 Tổng tiền: ${order.total.toLocaleString('vi-VN')} VNĐ</p>
-                    </div>
-                `;
-            });
-        }
-        
-        function clearAllOrders() {
-            if (confirm('⚠️ Bạn có chắc muốn xóa tất cả đơn hàng?')) {
-                localStorage.removeItem('orderHistory');
-                loadOrders();
-            }
-        }
-        
-        loadOrders();
-    </script>
+
+function xoaHetDonHang() {
+    if (confirm('Xóa hết đơn hàng?')) {
+        localStorage.removeItem('orderHistory');
+        taiDonHang();
+    }
+}
+
+taiDonHang();
+</script>
+
 </body>
 </html>
