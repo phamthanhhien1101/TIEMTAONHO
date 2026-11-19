@@ -94,19 +94,19 @@ document.getElementById('checkout-form').addEventListener('submit', function(e) 
     const paymentMethod = document.querySelector('input[name="payment-method"]:checked').value;
     const total = cart.reduce((sum, item) => sum + parseInt(item.price.replace(/\D/g, '')) * item.quantity, 0);
     
-    // ✅ Chỉ LƯU đơn hàng — KHÔNG chuyển trang
+    // Lưu đơn hàng
     saveOrder(customerInfo, paymentMethod, total);
     
-    // ✅ Chỉ hiện thông báo
+    // Hiện thông báo
     alert(createOrderMessage(customerInfo, paymentMethod, total));
     
-    // ✅ Xóa giỏ hàng & reset form — VỀ TRANG CHỦ
+    // Xóa giỏ hàng & reset form
     cart = [];
     localStorage.removeItem('cart');
     e.target.reset();
     document.querySelector('input[value="cod"]').checked = true;
     
-    // ✅ Về trang chủ — KHÔNG mở orders.html
+    // ✅ QUAY VỀ TRANG CHỦ sau khi nhấn OK
     window.location.href = 'index.html';
 });
 
