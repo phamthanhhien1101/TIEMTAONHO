@@ -1,6 +1,5 @@
 let cart = JSON.parse(localStorage.getItem('cart')) || [];
 
-// === Hiển thị đơn hàng ===
 function displayOrder() {
     const itemsContainer = document.getElementById('order-items');
     const totalEl = document.getElementById('final-total');
@@ -32,33 +31,6 @@ function displayOrder() {
     totalEl.textContent = total.toLocaleString('vi-VN') + ' VNĐ';
 }
 
-// === Tạo thông báo đơn hàng ===
-function createOrderMessage(customerInfo, paymentMethod, total) {
-    const paymentNames = {
-        cod: '💵 Tiền mặt khi nhận hàng',
-        bank: '🏦 Chuyển khoản ngân hàng',
-        card: '💳 Thẻ tín dụng / Ghi nợ'
-    };
-    
-    return `🎉 Đặt hàng thành công!
-
-📦 ĐƠN HÀNG MỚI
-══════════════════
-👤 Người nhận: ${customerInfo.name}
-📞 SĐT: ${customerInfo.phone}
-📍 Địa chỉ: ${customerInfo.address}
-💳 Thanh toán: ${paymentNames[paymentMethod]}
-📝 Ghi chú: ${customerInfo.note || 'Không có'}
-══════════════════
-🛒 Chi tiết:
-${cart.map(item => `• ${item.name}
-  └ ${item.color} | ${item.capacity} | ${item.price} × ${item.quantity}`).join('\n')}
-══════════════════
-💰 TỔNG TIỀN: ${total.toLocaleString('vi-VN')} VNĐ
-🕐 Thời gian: ${new Date().toLocaleString('vi-VN')}`;
-}
-
-// === Lưu đơn hàng vào localStorage ===
 function saveOrder(customerInfo, paymentMethod, total) {
     const order = {
         id: Date.now(),
@@ -74,7 +46,6 @@ function saveOrder(customerInfo, paymentMethod, total) {
     localStorage.setItem('orderHistory', JSON.stringify(orders));
 }
 
-// === Xử lý đặt hàng ===
 document.getElementById('checkout-form').addEventListener('submit', function(e) {
     e.preventDefault();
     
@@ -83,7 +54,6 @@ document.getElementById('checkout-form').addEventListener('submit', function(e) 
         return;
     }
     
-    // Lấy thông tin
     const customerInfo = {
         name: document.getElementById('customer-name').value,
         phone: document.getElementById('customer-phone').value,
@@ -94,21 +64,15 @@ document.getElementById('checkout-form').addEventListener('submit', function(e) 
     const paymentMethod = document.querySelector('input[name="payment-method"]:checked').value;
     const total = cart.reduce((sum, item) => sum + parseInt(item.price.replace(/\D/g, '')) * item.quantity, 0);
     
-    // Lưu đơn hàng
     saveOrder(customerInfo, paymentMethod, total);
     
-    // Hiện thông báo
-    alert(createOrderMessage(customerInfo, paymentMethod, total));
+    alert('✅ Đặt hàng thành công!');
     
-    // Xóa giỏ hàng & reset form
     cart = [];
     localStorage.removeItem('cart');
     e.target.reset();
-    document.querySelector('input[value="cod"]').checked = true;
     
-    // ✅ QUAY VỀ TRANG CHỦ sau khi nhấn OK
     window.location.href = 'index.html';
 });
 
-// === Khởi động ===
 displayOrder();
